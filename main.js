@@ -33,20 +33,26 @@ scene.add(warehouse);
 //events
 const sliderX = document.getElementById("warehouseRangeX");
 const sliderY = document.getElementById("warehouseRangeY");
+const sliderZ = document.getElementById("warehouseRangeZ");
+
 const outputX = document.getElementById("displayNumberX");
 const outputY = document.getElementById("displayNumberY");
+const outputZ = document.getElementById("displayNumberZ");
 
 outputX.innerHTML = sliderX.value;
 sliderX.addEventListener("input", (event) => {
 	outputX.innerHTML = event.target.value;
-	// API.xRepeat = event.target.value;
 	scaleWallX(event.target.value);
 });
 outputY.innerHTML = sliderY.value;
 sliderY.addEventListener("input", (event) => {
 	outputY.innerHTML = event.target.value;
-	// API.yRepeat = event.target.value;
 	scaleWallY(event.target.value);
+});
+outputZ.innerHTML = sliderZ.value;
+sliderZ.addEventListener("input", (event) => {
+	outputZ.innerHTML = event.target.value;
+	scaleWallZ(event.target.value);
 });
 
 //animate
