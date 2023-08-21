@@ -3,6 +3,9 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { TextureLoader } from "three";
 import { Group } from "three";
 
+//object og stats
+const objStats = {};
+
 //TODO: load multiple models
 const modelsURL = {
 	w: "models/test_category/test_category/walls.gltf",
@@ -22,9 +25,13 @@ const loadModel = () =>
 			url,
 			(gltf) => {
 				const model = gltf.scene.clone();
+				// console.log("model", model);
 				model.name = gltf.scene.children[0].name[0];
 				console.log(model);
 				warehouse.add(model);
+				// objStats[model.name] = {
+
+				// }
 				console.log("warehouse added", model.name);
 				applyTextureFirst(model, textureURL[model.name]);
 			},
