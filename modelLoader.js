@@ -15,13 +15,13 @@ const modelsURL = {
 	v: "models/test_category/test_category/verticals.gltf",
 	t: "models/test_category/test_category/triangles.gltf",
 };
-const gltfLoader = new GLTFLoader();
+const mainLoader = new GLTFLoader();
 
 //create warehouse model group
 export const warehouse = new Group();
 const loadModel = () =>
 	Object.values(modelsURL).forEach((url) => {
-		gltfLoader.load(
+		mainLoader.load(
 			url,
 			(gltf) => {
 				const model = gltf.scene.clone();
@@ -29,9 +29,6 @@ const loadModel = () =>
 				model.name = gltf.scene.children[0].name[0];
 				console.log(model);
 				warehouse.add(model);
-				// objStats[model.name] = {
-
-				// }
 				console.log("warehouse added", model.name);
 				applyTextureFirst(model, textureURL[model.name]);
 			},
@@ -62,13 +59,12 @@ const applyTextureFirst = (model, textureURL) => {
 		textureURL,
 		(texture) => {
 			const textureS = texture.clone();
-			console.log("textureS", textureS);
+			// console.log("textureS", textureS);
 			textureS.wrapS = THREE.RepeatWrapping;
 			textureS.wrapT = THREE.RepeatWrapping;
 			textureS.repeat.set(20, 1);
 			textureS.flipY = false;
 			model.traverse((child) => {
-				// debugger;
 				if (child.isMesh || child.isPoint) {
 					if (child.material.map) {
 						child.material.map.dispose();
@@ -82,7 +78,6 @@ const applyTextureFirst = (model, textureURL) => {
 					child.material = newMaterial;
 				}
 			});
-			// renderer.render( scene, camera );
 		},
 		undefined,
 		(error) => console.log("texture something went wrong", error)
