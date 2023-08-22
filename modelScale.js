@@ -1,5 +1,4 @@
 import { warehouse } from "./modelLoader";
-import { renderer } from "./main";
 
 //Scale model
 export const scaleWallX = (value) => {
